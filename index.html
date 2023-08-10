@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="Imposition Calculator" name="description">
+  <title>Imposition Calculator</title>
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
+</head>
+
+<body>
+  <!-- Main Window -->
+  <div class="window active" style="width: 500px; align-self: center;">
+    <div class="title-bar">
+      <div class="title-bar-text">Imposition Calculator</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+
+<!-- Tabs Section -->
+<div class="window-body has-space">
+    <menu role="tablist">
+        <button role="tab" id="tabButtonA" aria-selected="true" aria-controls="tab-A">Calculator</button>
+        <button role="tab" id="tabButtonB" aria-controls="tab-B">History Log</button>
+        <button role="tab" id="tabButtonC" aria-controls="tab-C">About</button>
+    </menu>
+<!-- </div> -->
+
+      <!-- Calculator Tab -->
+      <article role="tabpanel" aria-labelledby="tabButtonA" id="tab-A">
+          <!-- Imposition Form -->
+          <form id="impositionForm">
+
+            <!-- Imposition Visualization -->
+            <fieldset>
+              <legend>Imposition Visualization</legend>
+              <div id="sheetWrapper" style="display: flex; justify-content: center; align-items: center; background-color: #fff; border: 2px solid black; position: relative;">
+                <!-- Documents, cuts, and slits will be appended here by JavaScript -->
+              </div>
+            </fieldset>
+
+            <!-- Controls -->
+            <fieldset>
+              <legend>Calculate!</legend>
+
+              <!-- Button and Progress Bar Section -->
+              <section class="field-row">
+                <!-- Calculate Button -->
+                <button type="button" id="calculate">Calculate</button>
+
+                <!-- Progress Bar -->
+                <progress id="progressBar" value="0" max="100"></progress>
+              </section>
+            </fieldset>
+                        
+            <!-- Sheet Dimensions -->
+            <fieldset>
+              <legend>Sheet Dimensions</legend>
+              <section class="field-row">
+                <label for="paperSize">Paper Size:</label>
+                <select id="paperSize" onchange="setPaperSize()"></select>
+              </section>
+              <section class="field-row">
+                <label for="sheetWidth">Sheet Width (in inches):</label>
+                <input type="number" id="sheetWidth" value="12" step="1" required>
+              </section>
+              <section class="field-row">
+                <label for="sheetLength">Sheet Length (in inches):</label>
+                <input type="number" id="sheetLength" value="18" step="1" required>
+              </section>
+            </fieldset>
+
+            <!-- Document Dimensions -->
+            <fieldset>
+              <legend>Document Dimensions</legend>
+              <section class="field-row">
+                <label for="docWidth">Document Width (in inches):</label>
+                <input type="number" id="docWidth" value="5" step="1" required>
+              </section>
+              <section class="field-row">
+                <label for="docLength">Document Length (in inches):</label>
+                <input type="number" id="docLength" value="7" step="1" required>
+              </section>
+            </fieldset>
+
+            <!-- Imposition Settings -->
+            <fieldset>
+              <legend>Imposition Settings</legend>
+              <section class="field-row">
+                <label for="docsAcross">Documents Across:</label>
+                <input type="number" id="docsAcross" value="2" step="1" required>
+              </section>
+              <section class="field-row">
+                <label for="docsDown">Documents Down:</label>
+                <input type="number" id="docsDown" value="2" step="1" required>
+              </section>
+            </fieldset>
+
+            <!-- Gutter -->
+            <fieldset>
+              <legend>Gutter</legend>
+              <section class="field-row">
+                <label for="gutterType">Gutter Size:</label>
+                <select id="gutterType" onchange="setGutterSize()"></select>
+              </section>
+              <section class="field-row">
+                <label for="gutterWidth">Gutter Width (in inches):</label>
+                <input type="number" id="gutterWidth" value="0.315" step="0.0393" required>
+              </section>
+              <section class="field-row">
+                <label for="gutterLength">Gutter Length (in inches):</label>
+                <input type="number" id="gutterLength" value="0.315" step="0.0393" required>
+              </section>
+            </fieldset>
+
+            <!-- Results -->
+            <fieldset>
+              <legend>Results</legend>
+              <table style="margin: 3%; width: 94%; table-layout: fixed;">
+                <tr>
+                  <th></th>
+                  <th>Inches</th>
+                  <th>mm</th>
+                </tr>
+                <tr>
+                  <td>Sheet Width</td>
+                  <td id="sheetWidthResult"></td>
+                  <td id="sheetWidthResult_mm"></td>
+                </tr>
+                <tr>
+                  <td>Sheet Length</td>
+                  <td id="sheetLengthResult"></td>
+                  <td id="sheetLengthResult_mm"></td>
+                </tr>
+                <tr>
+                  <td>Document Width</td>
+                  <td id="docWidthResult"></td>
+                  <td id="docWidthResult_mm"></td>
+                </tr>
+                <tr>
+                  <td>Document Length</td>
+                  <td id="docLengthResult"></td>
+                  <td id="docLengthResult_mm"></td>
+                </tr>
+                <tr>
+                  <td>Lead Trim</td>
+                  <td id="topLeadResult"></td>
+                  <td id="topLeadResult_mm"></td>
+                </tr>
+                <tr>
+                  <td>Side Trim</td>
+                  <td id="sideLeadResult"></td>
+                  <td id="sideLeadResult_mm"></td>
+                </tr>
+              </table>
+            </fieldset>
+
+            <!-- Cuts & Slits -->
+            <fieldset>
+              <legend>Cuts & Slits</legend>
+              <table style="margin: 3%; width: 94%; table-layout: fixed;">
+                <thead>
+                  <tr>
+                    <th>Number</th>
+                    <th>Inches</th>
+                    <th>mm</th>
+                  </tr>
+                </thead>
+                <tbody id="cutsSlitsResults">
+                </tbody>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </article>
+
+      <!-- History Log Tab -->
+      <article role="tabpanel" hidden aria-labelledby="tabButtonB" id="tab-B">
+      </article>
+      </article>      
+
+      <!-- About Tab -->
+      <article role="tabpanel" hidden aria-labelledby="tabButtonC" id="tab-C">
+      </article>
+    </section>
+  </div>
+  <!-- Scripts -->
+  <script src="tabNavigation.js"></script>
+  <script src="app.js"></script>
+  <script src="visualizeImposition.js"></script>
+  <script src="startProgressBar.js"></script>
+  <script src="dropdown.js"></script>
+</body>
+
+</html>
