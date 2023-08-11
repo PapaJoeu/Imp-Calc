@@ -11,7 +11,6 @@ const elements = {
   progressBar: document.getElementById("progressBar"),
   calculateButton: document.getElementById("calculate")
 };
-// let requestLog = [];
 
 // Event Listeners
 elements.calculateButton.addEventListener("click", calculate);
@@ -43,7 +42,6 @@ function updateDocsAcrossAndDown() {
     // Handle invalid or missing input values
     elements.docsAcross.value = '';
     elements.docsDown.value = '';
-    console.error('Invalid input values. Please enter valid numbers.');
     return;
   }
 
@@ -156,17 +154,13 @@ function displayCutsAndSlits(docsAcross, docsDown) {
   // Calculate slits
   const slits = calculateSlits(sheetWidth, docWidth, docsAcross, gutterWidth);
 
-  // Prepare the cuts and slits data
-  let cutsSlitsResults = "";
-  cuts.forEach((cut, index) => {
-    cutsSlitsResults += `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`;
-  });
-  slits.forEach((slit, index) => {
-    cutsSlitsResults += `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`;
-  });
+// Prepare the cuts and slits data
+const cutsSlitsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`)
+  .concat(slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`))
+  .join('');
 
-  // Populate the cuts and slits table
-  document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
+// Populate the cuts and slits table
+document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
 }
 
 /**
@@ -211,18 +205,5 @@ function calculateSlits(sheetWidth, docWidth, docsAcross, gutterWidth) {
   }
 
   return slits;
-}
-
-// New function to create a new row in the history table
-function addHistoryRow(timeOfCalculation, sheetWidth, sheetLength, docWidth, docLength) {
-  const historyTableBody = document.getElementById('historyTableBody');
-  const newRow = historyTableBody.insertRow();
-  newRow.innerHTML = `
-    <td>${timeOfCalculation}</td>
-    <td>${sheetWidth.toFixed(3)} in</td>
-    <td>${sheetLength.toFixed(3)} in</td>
-    <td>${docWidth.toFixed(3)} in</td>
-    <td>${docLength.toFixed(3)} in</td>
-  `;
 }
 
