@@ -7,12 +7,10 @@ window.onload = function() {
   
   // Define a map of gutter types with their corresponding width and length values
   const gutterMap = {
-    "8mm": { width: 0.315, length: 0.315 },
-    "5mm": { width: 0.197, length: 0.197 },
-    "1/16 inch": { width: 0.0625, length: 0.0625 },
-    "1/4 inch": { width: 0.25, length: 0.25 },
-    "1/8 inch": { width: 0.125, length: 0.125 },
-    "10mm": { width: 0.394, length: 0.394 },
+    "8mm - 0.315 in": { width: 0.315, length: 0.315 },
+    "5mm - 0.197 in": { width: 0.197, length: 0.197 },
+    "10mm - 0.394 in": { width: 0.394, length: 0.394 },
+    ".25in - 0.25 in": { width: 0.25, length: 0.25 },
   };
   
   /**
@@ -107,17 +105,6 @@ window.onload = function() {
     const paperSizes = [
       { value: "12x18", label: "12x18" },
       { value: "13x19", label: "13x19" },
-      { value: "half-12x18", label: "Half 12x18" },
-      { value: "half-13x19", label: "Half 13x19" },
-      { value: "A4", label: "A4" },
-      { value: "A3", label: "A3" },
-      { value: "Oficio", label: "Oficio" },
-      { value: "Letter", label: "Letter" },
-      { value: "Legal", label: "Legal" },
-      { value: "Mini", label: "Mini" },
-      { value: "Tabloid", label: "Tabloid" },
-      { value: "Ledger", label: "Ledger" },
-      { value: "custom", label: "Custom" }
     ];
   
     // Generate HTML for each paper size option and append it to the select element
