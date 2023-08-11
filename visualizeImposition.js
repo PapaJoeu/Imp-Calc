@@ -27,6 +27,8 @@ function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDow
   const offsetX = (sheetWidth * 25.4 - totalDocWidth) / 2;
   const offsetY = (sheetLength * 25.4 - totalDocHeight) / 2;
 
+  docDivs.length = 0; // Clear the array
+
   for (let i = 0; i < docsDown; i++) {
     for (let j = 0; j < docsAcross; j++) {
       const docDiv = document.createElement("div");

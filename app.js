@@ -1,4 +1,3 @@
-
 const elements = {
   paperSize: document.getElementById("paperSize"),
   sheetWidth: document.getElementById("sheetWidth"),
@@ -12,7 +11,7 @@ const elements = {
   progressBar: document.getElementById("progressBar"),
   calculateButton: document.getElementById("calculate")
 };
-let requestLog = [];
+// let requestLog = [];
 
 // Event Listeners
 elements.calculateButton.addEventListener("click", calculate);
