@@ -63,17 +63,6 @@ window.onload = function() {
     const sizeMap = {
       "12x18": { width: 12, length: 18 },
       "13x19": { width: 13, length: 19 },
-      "half-12x18": { width: 12, length: 9 },
-      "half-13x19": { width: 13, length: 9.5 },
-      "A4": { width: 8.27, length: 11.69 },
-      "A3": { width: 11.69, length: 16.54 },
-      "Oficio": { width: 8.5, length: 13 },
-      "Letter": { width: 8.5, length: 11 },
-      "Legal": { width: 8.5, length: 14 },
-      "Mini": { width: 5.5, length: 8.5 },
-      "Tabloid": { width: 11, length: 17 },
-      "Ledger": { width: 17, length: 11 },
-      "custom": { width: "", length: "" }
     };
   
     // Retrieve the dimensions of the selected paper size from the size map
