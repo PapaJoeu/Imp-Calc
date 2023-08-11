@@ -13,6 +13,8 @@
  * @param {number} gutterWidth - The width of the gutter between documents in inches.
  * @param {number} gutterLength - The length of the gutter between documents in inches.
  */
+const docDivs = []; // Move the declaration outside of the function
+
 function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength) {
   const visualizationDiv = document.getElementById("sheetWrapper");
   visualizationDiv.style.width = `${sheetWidth * 25.4}px`;
@@ -35,7 +37,10 @@ function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDow
       docDiv.style.top = `${offsetY + i * (docLength + gutterLength) * 25.4}px`;
       docDiv.style.backgroundColor = "blue";
       docDiv.style.border = "2px solid black";
-      visualizationDiv.appendChild(docDiv);
+      docDivs.push(docDiv); // Add the div element to the array
     }
   }
+
+  // Append all the div elements to the visualizationDiv at once
+  visualizationDiv.append(...docDivs);
 }
