@@ -164,46 +164,28 @@ document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
 }
 
 /**
- * Calculate the positions of cuts based on the sheet length, document length, number of documents down, and gutter length.
- *
- * @param {number} sheetLength - The length of the sheet.
- * @param {number} docLength - The length of an individual document.
- * @param {number} docsDown - The number of documents in the vertical direction.
- * @param {number} gutterLength - The length of the gutter between documents.
- * @returns {number[]} - An array containing the cut positions.
+ * Calculate positions based on sheet size, document size, number of documents, and gutter size.
+ * @returns {number[]} - Positions array.
  */
+function calculatePositions(sheetSize, docSize, numDocs, gutterSize) {
+  const positions = [];
+  const position = (sheetSize - ((docSize * numDocs) + (gutterSize * (numDocs - 1)))) / 2;
+
+  for (let i = 0; i < numDocs * 2; i++) {
+      const offset = Math.floor(i / 2);
+      const calculatedPosition = position + offset * (docSize + gutterSize) + (i % 2 === 0 ? 0 : docSize);
+      positions.push(calculatedPosition.toFixed(3));
+  }
+
+  return positions;
+}
+
+/** Calculate cut positions based on sheet length, document length, docs down, and gutter length. */
 function calculateCuts(sheetLength, docLength, docsDown, gutterLength) {
-  const cuts = [];
-  const position = (sheetLength - ((docLength * docsDown) + (gutterLength * (docsDown - 1)))) / 2;
-
-  for (let i = 0; i < docsDown * 2; i++) {
-    const offset = Math.floor(i / 2);
-    const cutPosition = position + offset * (docLength + gutterLength) + (i % 2 === 0 ? 0 : docLength);
-    cuts.push(cutPosition.toFixed(3));
-  }
-
-  return cuts;
+  return calculatePositions(sheetLength, docLength, docsDown, gutterLength);
 }
 
-/**
- * Calculate the positions of slits based on the sheet width, document width, number of documents across, and gutter width.
- *
- * @param {number} sheetWidth - The width of the sheet.
- * @param {number} docWidth - The width of an individual document.
- * @param {number} docsAcross - The number of documents in the horizontal direction.
- * @param {number} gutterWidth - The width of the gutter between documents.
- * @returns {number[]} - An array containing the slit positions.
- */
+/** Calculate slit positions based on sheet width, document width, docs across, and gutter width. */
 function calculateSlits(sheetWidth, docWidth, docsAcross, gutterWidth) {
-  const slits = [];
-  const position = (sheetWidth - ((docWidth * docsAcross) + (gutterWidth * (docsAcross - 1)))) / 2;
-
-  for (let i = 0; i < docsAcross * 2; i++) {
-    const offset = Math.floor(i / 2);
-    const slitPosition = position + offset * (docWidth + gutterWidth) + (i % 2 === 0 ? 0 : docWidth);
-    slits.push(slitPosition.toFixed(3));
-  }
-
-  return slits;
+  return calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
 }
-
