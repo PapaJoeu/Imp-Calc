@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Imposition Calculator" name="description" />
+    <title>Imposition Calculator</title>
+    <link href="https://unpkg.com/7.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Main Window -->
+    <div style="display: flex; justify-content: space-between; padding: 20px">
+      <div class="window active" style="width: 95%; align-self: center">
+        <div class="title-bar">
+          <div class="title-bar-text">Imposition Calculator</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <!-- Tabs Section -->
+        <div class="window-body has-space">
+          <menu role="tablist">
+            <button
+              aria-controls="tab-A"
+              aria-selected="true"
+              id="tabButtonA"
+              role="tab"
+            >
+              Calculator
+            </button>
+            <button aria-controls="tab-B" id="tabButtonB" role="tab">
+              History Log
+            </button>
+            <button aria-controls="tab-C" id="tabButtonC" role="tab">
+              About
+            </button>
+          </menu>
+          <!-- </div> -->
+          <!-- Calculator Tab -->
+          <article
+            aria-labelledby="tabButtonA"
+            id="tab-A"
+            role="tabpanel"
+          ></article>
+        </div>
+      </div>
+      <div class="window active" style="width: 95%; align-self: center">
+        <div class="title-bar">
+          <div class="title-bar-text">Imposition Calculator</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <!-- Tabs Section -->
+        <div class="window-body has-space">
+          <!-- Imposition Visualization -->
+          <fieldset>
+            <legend>Imposition Visualization</legend>
+            <div
+              id="sheetWrapper"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                border: 2px solid black;
+                position: relative;
+              "
+            >
+              <!-- Scripts -->
+              <script src="app.js"></script>
+              <script src="updated_tabNavigation(1).js"></script>
+              <script src="visualizeImposition.js"></script>
+              <script src="startProgressBar.js"></script>
+              <script src="paperSize.js"></script>
+              <script src="gutterSize.js"></script>
+              <script src="draggableWindows.js"></script>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

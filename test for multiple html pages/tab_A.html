@@ -1,0 +1,140 @@
+<article aria-labelledby="tabButtonA" id="tab-A" role="tabpanel">
+  <!-- Imposition Form -->
+  <form id="impositionForm">
+    <!-- Controls -->
+    <fieldset>
+      <legend>Calculate!</legend>
+      <!-- Button and Progress Bar Section -->
+      <section class="field-row">
+        <!-- Calculate Button -->
+        <button id="calculate" type="button">Calculate</button>
+      </section>
+    </fieldset>
+    <!-- Sheet Dimensions -->
+    <fieldset>
+      <legend>Sheet Dimensions</legend>
+      <section class="field-row">
+        <label for="paperSize">Paper Size:</label>
+        <select
+          id="paperSize"
+          onchange="setDimensionsForSelectedPaper()"
+        ></select>
+      </section>
+      <section class="field-row">
+        <label for="sheetWidth">Sheet Width (in inches):</label>
+        <input id="sheetWidth" required="" step="1" type="number" value="12" />
+      </section>
+      <section class="field-row">
+        <label for="sheetLength">Sheet Length (in inches):</label>
+        <input id="sheetLength" required="" step="1" type="number" value="18" />
+      </section>
+    </fieldset>
+    <!-- Document Dimensions -->
+    <fieldset>
+      <legend>Document Dimensions</legend>
+      <section class="field-row">
+        <label for="docWidth">Document Width (in inches):</label>
+        <input id="docWidth" required="" step="1" type="number" value="5" />
+      </section>
+      <section class="field-row">
+        <label for="docLength">Document Length (in inches):</label>
+        <input id="docLength" required="" step="1" type="number" value="7" />
+      </section>
+    </fieldset>
+    <!-- Imposition Settings -->
+    <fieldset>
+      <legend>Imposition Settings</legend>
+      <section class="field-row">
+        <label for="docsAcross">Documents Across:</label>
+        <input id="docsAcross" required="" step="1" type="number" value="2" />
+      </section>
+      <section class="field-row">
+        <label for="docsDown">Documents Down:</label>
+        <input id="docsDown" required="" step="1" type="number" value="2" />
+      </section>
+    </fieldset>
+    <!-- Gutter -->
+    <fieldset>
+      <legend>Gutter</legend>
+      <section class="field-row">
+        <label for="gutterType">Gutter Size:</label>
+        <select id="gutterType" onchange="setGutterSize()"></select>
+      </section>
+      <section class="field-row">
+        <label for="gutterWidth">Gutter Width (in inches):</label>
+        <input
+          id="gutterWidth"
+          required=""
+          step="0.0393"
+          type="number"
+          value="0.315"
+        />
+      </section>
+      <section class="field-row">
+        <label for="gutterLength">Gutter Length (in inches):</label>
+        <input
+          id="gutterLength"
+          required=""
+          step="0.0393"
+          type="number"
+          value="0.315"
+        />
+      </section>
+    </fieldset>
+    <!-- Results -->
+    <fieldset>
+      <legend>Results</legend>
+      <table style="margin: 3%; width: 94%; table-layout: fixed">
+        <tr>
+          <th></th>
+          <th>Inches</th>
+          <th>mm</th>
+        </tr>
+        <tr>
+          <td>Sheet Width</td>
+          <td id="sheetWidthResult"></td>
+          <td id="sheetWidthResult_mm"></td>
+        </tr>
+        <tr>
+          <td>Sheet Length</td>
+          <td id="sheetLengthResult"></td>
+          <td id="sheetLengthResult_mm"></td>
+        </tr>
+        <tr>
+          <td>Document Width</td>
+          <td id="docWidthResult"></td>
+          <td id="docWidthResult_mm"></td>
+        </tr>
+        <tr>
+          <td>Document Length</td>
+          <td id="docLengthResult"></td>
+          <td id="docLengthResult_mm"></td>
+        </tr>
+        <tr>
+          <td>Lead Trim</td>
+          <td id="topLeadResult"></td>
+          <td id="topLeadResult_mm"></td>
+        </tr>
+        <tr>
+          <td>Side Trim</td>
+          <td id="sideLeadResult"></td>
+          <td id="sideLeadResult_mm"></td>
+        </tr>
+      </table>
+    </fieldset>
+    <!-- Cuts & Slits -->
+    <fieldset>
+      <legend>Cuts &amp; Slits</legend>
+      <table style="margin: 3%; width: 94%; table-layout: fixed">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Inches</th>
+            <th>mm</th>
+          </tr>
+        </thead>
+        <tbody id="cutsSlitsResults"></tbody>
+      </table>
+    </fieldset>
+  </form>
+</article>
