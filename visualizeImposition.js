@@ -13,6 +13,12 @@
  * @param {number} gutterWidth - The width of the gutter between documents in inches.
  * @param {number} gutterLength - The length of the gutter between documents in inches.
  */
+
+// Call visualizeImposition with default values on load
+window.addEventListener("load", function() {
+  visualizeImposition(12, 18, 0.25, 0.25, 2, 2, 5, 7, 0.315, 0.315);
+});
+
 const docDivs = []; // Move the declaration outside of the function
 
 function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength) {
