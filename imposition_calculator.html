@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Imposition Calculator" name="description" />
+    <title>Imposition Calculator</title>
+    <link href="https://unpkg.com/7.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Main Window -->
+    <div class="main-container">
+        <!-- Input Column -->
+        <div class="input-column">
+            <!-- Calculate! -->
+            <fieldset class="input-section">
+                <legend>Calculate!</legend>
+                <button id="calculate" type="button">Calculate</button>
+            </fieldset>
+            
+            <!-- Sheet Dimensions -->
+            <fieldset class="input-section">
+                <legend>Sheet Dimensions</legend>
+                <div class="field-row">
+                    <label for="sheetWidth">Width</label>
+                    <input id="sheetWidth" type="number" />
+                </div>
+                <div class="field-row">
+                    <label for="sheetHeight">Height</label>
+                    <input id="sheetHeight" type="number" />
+                </div>
+            </fieldset>
+            
+            <!-- Document Dimensions -->
+            <fieldset class="input-section">
+                <!-- Existing content for Document Dimensions here -->
+            </fieldset>
+            
+            <!-- Imposition Settings -->
+            <fieldset class="input-section">
+                <!-- Existing content for Imposition Settings here -->
+            </fieldset>
+            
+            <!-- Gutter -->
+            <fieldset class="input-section">
+                <!-- Existing content for Gutter here -->
+            </fieldset>
+        </div>
+        
+        <!-- Results Column -->
+        <div class="result-column">
+            <!-- Results -->
+            <fieldset class="result-section">
+                <!-- Existing content for Results here -->
+            </fieldset>
+            
+            <!-- Cuts & Slits -->
+            <fieldset class="result-section">
+                <!-- Existing content for Cuts & Slits here -->
+            </fieldset>
+            
+            <!-- Imposition Visualization -->
+            <fieldset class="result-section">
+                <!-- Existing content for Imposition Visualization here -->
+            </fieldset>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script src="tabNavigation.js"></script>
+    <script src="visualizeImposition.js"></script>
+    <script src="startProgressBar.js"></script>
+    <script src="paperSize.js"></script>
+    <script src="gutterSize.js"></script>
+    <script src="draggableWindows.js"></script>
+</body>
+</html>
