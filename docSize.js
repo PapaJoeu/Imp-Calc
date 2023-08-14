@@ -1,5 +1,3 @@
-// docSize.js
-
 // Constants
 const docSizes = {
     "5x7": { description: "5x7", width: 5, length: 7 },
@@ -13,27 +11,22 @@ const docSizes = {
     "6x6": { description: "6x6", width: 6, length: 6 },
 };
 
-// Cache DOM elements
-const docSizeSelect = document.getElementById("docSize");
-const docWidthInput = document.getElementById("docWidth");
-const docLengthInput = document.getElementById("docLength");
-
 // Functions
 function populateDocSizes() {
     let optionsHTML = "";
     for (const size in docSizes) {
         optionsHTML += `<option value="${size}">${size}</option>`;
     }
-    docSizeSelect.innerHTML = optionsHTML;
+    document.getElementById("docSize").innerHTML = optionsHTML;
 }
 
 function setDimensionsForSelectedDoc() {
-    const selectedSize = docSizes[docSizeSelect.value];
+    const selectedSize = docSizes[document.getElementById("docSize").value];
     if (selectedSize) {
-        docWidthInput.value = selectedSize.width;
-        docLengthInput.value = selectedSize.length;
+        document.getElementById("docWidth").value = selectedSize.width;
+        document.getElementById("docLength").value = selectedSize.length;
     } else {
-        console.error("Selected doc size not found!");
+        console.error("Selected document size not found!");
     }
 }
 
@@ -42,5 +35,6 @@ function initializeDocSizes() {
     setDimensionsForSelectedDoc();
 }
 
-// Initialize doc sizes on page load:
+// Initialize document sizes on page load:
 window.addEventListener('load', initializeDocSizes);
+document.getElementById("docSize").addEventListener('change', setDimensionsForSelectedDoc);

@@ -1,6 +1,5 @@
 .main-container {
   display: flex;
-  justify-content: space-around;
 }
 
 .input-column {
@@ -12,7 +11,7 @@
 }
 
 .third-column {
-  width: auto;
+  width: 25%;
 }
 
 .section {
@@ -26,6 +25,7 @@
   /* Switch to a single column layout */
   .main-container {
     flex-direction: column;
+    width: auto;
   }
 
   /* Full width for all columns */
