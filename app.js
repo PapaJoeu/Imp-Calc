@@ -92,17 +92,17 @@ function calculate() {
     }
 
     // Calculate lead and side trim
-    const topLead = sheetLength - (docsDown * docLength + (docsDown - 1) * gutterLength);
-    const sideLead = sheetWidth - (docsAcross * docWidth + (docsAcross - 1) * gutterWidth);
+    const leadTrim = sheetLength - (docsDown * docLength + (docsDown - 1) * gutterLength);
+    const sideTrim = sheetWidth - (docsAcross * docWidth + (docsAcross - 1) * gutterWidth);
 
     // Display results
-    displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead);
+    displayResults(sheetWidth, sheetLength, docWidth, docLength, leadTrim, sideTrim);
 
     // Display cuts and slits
     displayCutsAndSlits(docsAcross, docsDown);
 
     // Visualize the imposition
-    visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength);
+    visualizeImposition(sheetWidth, sheetLength, leadTrim, sideTrim, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength);
   } catch (error) {
     console.error("An error occurred:", error.message);
     // Display an error message to the user or handle the error gracefully

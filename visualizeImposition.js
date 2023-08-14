@@ -4,7 +4,7 @@
  *
  * @param {number} sheetWidth - The width of the sheet in inches.
  * @param {number} sheetLength - The length of the sheet in inches.
- * @param {number} topLead - The top lead or margin in inches.
+ * @param {number} leadTrim - The top lead or margin in inches.
  * @param {number} sideLead - The side lead or margin in inches.
  * @param {number} docsDown - The number of documents down.
  * @param {number} docsAcross - The number of documents across.
@@ -21,7 +21,7 @@ window.addEventListener("load", function() {
 
 const docDivs = []; // Move the declaration outside of the function
 
-function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength) {
+function visualizeImposition(sheetWidth, sheetLength, leadTrim, sideTrim, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength) {
   const visualizationDiv = document.getElementById("sheetWrapper");
   visualizationDiv.style.width = `${sheetWidth * 25.4}px`;
   visualizationDiv.style.height = `${sheetLength * 25.4}px`;
@@ -30,8 +30,8 @@ function visualizeImposition(sheetWidth, sheetLength, topLead, sideLead, docsDow
   const totalDocWidth = (docWidth * docsAcross + gutterWidth * (docsAcross - 1)) * 25.4;
   const totalDocHeight = (docLength * docsDown + gutterLength * (docsDown - 1)) * 25.4;
 
-  const offsetX = (sheetWidth * 25.4 - totalDocWidth) / 2;
-  const offsetY = (sheetLength * 25.4 - totalDocHeight) / 2;
+  const offsetX = (sheetWidth * 25.4 - totalDocWidth - sideTrim) / 2;
+  const offsetY = (sheetLength * 25.4 - totalDocHeight - leadTrim) / 2;
 
   docDivs.length = 0; // Clear the array
 
