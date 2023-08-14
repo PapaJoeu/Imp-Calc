@@ -1,13 +1,24 @@
-
 .main-container {
     display: flex;
     justify-content: space-between;
 }
 
-.input-column, .result-column {
-    width: 49%;
+.input-column, .result-column, .third-column {
+    width: auto;
 }
 
-.input-section, .result-section {
-    margin-bottom: 5px;
+.section {
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .input-column, .result-column, .third-column {
+        width: 100%;
+    }
 }
