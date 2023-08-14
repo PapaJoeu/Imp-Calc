@@ -1,34 +1,39 @@
-// paperSizes.js
+// paperSize.js
 
 // Constants
 const paperSizes = {
-  "12x18 - 12in x 18in": { width: 12, length: 18 },
-  "13x19 - 13in x 19in": { width: 13, length: 19 },
+  "12x18": { description: "12x18", width: 12, length: 18 },
+  "13x19": { description: "13x19", width: 13, length: 19 },
 };
+
+// Cache DOM elements
+const paperSizeSelect = document.getElementById("paperSize");
+const sheetWidthInput = document.getElementById("sheetWidth");
+const sheetLengthInput = document.getElementById("sheetLength");
 
 // Functions
 function populatePaperSizes() {
-  const paperSizeSelect = document.getElementById("paperSize");
-  paperSizeSelect.innerHTML = "";
-  const optionsHTML = Object.keys(paperSizes)
-    .map((size) => `<option value="${size}">${size}</option>`)
-    .join("");
+  let optionsHTML = "";
+  for (const size in paperSizes) {
+    optionsHTML += `<option value="${size}">${size}</option>`;
+  }
   paperSizeSelect.innerHTML = optionsHTML;
 }
 
 function setDimensionsForSelectedPaper() {
-  const selectedPaperSize = document.getElementById("paperSize").value;
-  const selectedSize = paperSizes[selectedPaperSize];
-  document.getElementById("sheetWidth").value = selectedSize.width;
-  document.getElementById("sheetLength").value = selectedSize.length;
+  const selectedSize = paperSizes[paperSizeSelect.value];
+  if (selectedSize) {
+    sheetWidthInput.value = selectedSize.width;
+    sheetLengthInput.value = selectedSize.length;
+  } else {
+    console.error("Selected paper size not found!");
+  }
 }
-
-// Initialize paper sizes on page load:
-window.onload = function () {
-  initializePaperSizes();
-};
 
 function initializePaperSizes() {
   populatePaperSizes();
   setDimensionsForSelectedPaper();
 }
+
+// Initialize paper sizes on page load:
+window.addEventListener('load', initializePaperSizes);
