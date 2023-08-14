@@ -33,6 +33,7 @@ function setDimensionsForSelectedPaper() {
 function initializePaperSizes() {
   populatePaperSizes();
   setDimensionsForSelectedPaper();
+
 }
 
 // Initialize paper sizes on page load:

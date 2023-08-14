@@ -32,5 +32,5 @@ const gutterMap = {
   };
   
   function initializeGutters() {
-    populateGutterTypes();
+    calculateMaxDocSize();
   }
