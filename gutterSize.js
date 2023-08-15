@@ -23,6 +23,9 @@ const gutterMap = {
     const { width, length } = gutterMap[gutterType];
     document.getElementById("gutterWidth").value = width;
     document.getElementById("gutterLength").value = length;
+    // call updateDocsAcrossAndDown and calculate
+    updateDocsAcrossAndDown();
+    calculate();
   }
   
   // If you still need to initialize gutters on page load:

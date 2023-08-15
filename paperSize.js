@@ -25,6 +25,9 @@ function setDimensionsForSelectedPaper() {
   if (selectedSize) {
     sheetWidthInput.value = selectedSize.width;
     sheetLengthInput.value = selectedSize.length;
+    // call updateDocsAcrossAndDown and calculate
+    updateDocsAcrossAndDown();
+    calculate();
   } else {
     console.error("Selected paper size not found!");
   }
@@ -33,7 +36,6 @@ function setDimensionsForSelectedPaper() {
 function initializePaperSizes() {
   populatePaperSizes();
   setDimensionsForSelectedPaper();
-
 }
 
 // Initialize paper sizes on page load:
