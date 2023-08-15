@@ -1,23 +1,39 @@
+/* Main Container */
 .main-container {
-  display: flex;
+  display: flex; /* Display flex */
+  flex-wrap: wrap; /* Wrap elements to a new line when there is no space left in the container */
+  justify-content: space-around; /* Align items to the start of the container */
+  width: 1080px;
+  height: 100%;
 }
 
+/* Input Column */
 .input-column {
-  width: 25%;
+  min-width: 0;
+  max-width: 32%;
+  text-align: center; /* Align text to center */
 }
 
+/* Result Column */
 .result-column {
-  width: 33%;
+  min-width: 0;
+  max-width: 33.33%;
+  text-align: center; /* Align text to center */
 }
 
+/* Third Column */
 .third-column {
-  width: 25%;
+  min-width: 0;
+  max-width: 33.33%;
+  text-align: center; /* Align text to center */
 }
 
+/* Section */
 .section {
   padding: 20px;
   background-color: #f1f1f1;
-  box-sizing: border-box;
+  margin: 0 10px 10px 10px;
+  border-radius: 5px;
 }
 
 /* Media query for mobile devices */
@@ -32,6 +48,13 @@
   .input-column,
   .result-column,
   .third-column {
-    width: 100%;
+    text-align: left; /* Align text to left */
   }
+}
+
+/* Add A Background from a file */
+body {
+  background-image: url(https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
