@@ -1,16 +1,20 @@
-/**
- * Visualize imposition by creating div elements representing documents on a sheet.
- * @param {number} sheetWidth - The width of the sheet in inches.
- * @param {number} sheetLength - The length of the sheet in inches.
- * @param {number} leadTrim - The trim value for the leading edge in inches.
- * @param {number} sideTrim - The trim value for the side edge in inches.
- * @param {number} docsDown - The number of documents down on the sheet.
- * @param {number} docsAcross - The number of documents across on the sheet.
- * @param {number} docWidth - The width of each document in inches.
- * @param {number} docLength - The length of each document in inches.
- * @param {number} gutterWidth - The width of the gutter between documents in inches.
- * @param {number} gutterLength - The length of the gutter between documents in inches.
- */
+// Call visualizeImposition with default values on load
+window.addEventListener("load", function () {
+  visualizeImposition(12, 18, 3.685, 1.685, 2, 2, 5, 7, 0.315, 0.315);
+});
+
+// Event Listeners to update the imposition visualization when the input values change
+document.getElementById("sheetWidth").addEventListener("change", calculate);
+document.getElementById("sheetLength").addEventListener("change", calculate);
+document.getElementById("leadTrim").addEventListener("change", calculate);
+document.getElementById("sideTrim").addEventListener("change", calculate);
+document.getElementById("docsDown").addEventListener("change", calculate);
+document.getElementById("docsAcross").addEventListener("change", calculate);
+document.getElementById("docWidth").addEventListener("change", calculate);
+document.getElementById("docLength").addEventListener("change", calculate);
+document.getElementById("gutterWidth").addEventListener("change", calculate);
+document.getElementById("gutterLength").addEventListener("change", calculate);
+
 function visualizeImposition(
   sheetWidth,
   sheetLength,
@@ -53,7 +57,3 @@ function visualizeImposition(
   visualizationDiv.append(...docDivs);
 }
 
-// Call visualizeImposition with default values on load
-window.addEventListener("load", function () {
-  visualizeImposition(12, 18, 0.25, 0.25, 2, 2, 5, 7, 0.315, 0.315);
-});

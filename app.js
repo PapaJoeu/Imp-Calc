@@ -22,7 +22,6 @@ elements.docLength.addEventListener("change", updateDocsAcrossAndDown);
 elements.gutterWidth.addEventListener("change", updateDocsAcrossAndDown);
 elements.gutterLength.addEventListener("change", updateDocsAcrossAndDown);
 
-
 function updateDocsAcrossAndDown() {
   // Retrieve input values
   const sheetWidth = parseFloat(elements.sheetWidth.value);
