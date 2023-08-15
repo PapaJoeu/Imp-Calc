@@ -11,9 +11,10 @@ const elements = {
   progressBar: document.getElementById("progressBar"),
   calculateButton: document.getElementById("calculate")
 };
-
-// Event Listeners
+// Calculate Button!
 elements.calculateButton.addEventListener("click", calculate);
+
+// Hella event listeners for updating the number of documents across and down
 elements.sheetWidth.addEventListener("change", updateDocsAcrossAndDown);
 elements.sheetLength.addEventListener("change", updateDocsAcrossAndDown);
 elements.docWidth.addEventListener("change", updateDocsAcrossAndDown);
@@ -21,12 +22,7 @@ elements.docLength.addEventListener("change", updateDocsAcrossAndDown);
 elements.gutterWidth.addEventListener("change", updateDocsAcrossAndDown);
 elements.gutterLength.addEventListener("change", updateDocsAcrossAndDown);
 
-/**
- * Updates the number of documents across and down based on the input values.
- * 
- * @function updateDocsAcrossAndDown
- * @returns {void}
- */
+
 function updateDocsAcrossAndDown() {
   // Retrieve input values
   const sheetWidth = parseFloat(elements.sheetWidth.value);
@@ -45,7 +41,7 @@ function updateDocsAcrossAndDown() {
     return;
   }
 
-  // Perform calculations
+  // Find Max Values that can fit on the sheet incase prepress is too lazy to do the math
   const docsAcross = Math.floor((sheetWidth - gutterWidth) / (docWidth + gutterWidth));
   const docsDown = Math.floor((sheetLength - gutterLength) / (docLength + gutterLength));
 
@@ -58,18 +54,12 @@ function updateDocsAcrossAndDown() {
     return;
   }
 
-  // Update the number of documents across and down
+  // Update the number of documents across and down on the page
   elements.docsAcross.value = docsAcross;
   elements.docsDown.value = docsDown;
 }
 
-/**
- * Calculate Imposition Function
- *
- * This function performs calculations and displays results related to imposition for printing.
- * It retrieves input values from specific elements, calculates lead and side trim, and displays
- * the results on the webpage.
- */
+
 function calculate() {
   try {
     const getInputValue = (element) => parseFloat(element.value);
@@ -96,7 +86,7 @@ function calculate() {
     const sideTrim = sheetWidth - (docsAcross * docWidth + (docsAcross - 1) * gutterWidth);
 
     // Display results
-    displayResults(sheetWidth, sheetLength, docWidth, docLength, leadTrim, sideTrim);
+    displayResults(sheetWidth, sheetLength, docWidth, docLength, leadTrim, sideTrim, gutterWidth, gutterLength, docsAcross, docsDown);
 
     // Display cuts and slits
     displayCutsAndSlits(docsAcross, docsDown);
@@ -109,7 +99,7 @@ function calculate() {
   }
 }
 
-function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead) {
+function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead, gutterWidth, gutterLength, docsAcross, docsDown) {
   const displayValue = (id, value) => {
     document.getElementById(id).innerText = value.toFixed(3);
   };
@@ -131,6 +121,12 @@ function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, s
   displayValueInMm("topLeadResult_mm", topLead);
   displayValue("sideLeadResult", sideLead);
   displayValueInMm("sideLeadResult_mm", sideLead);
+  displayValue("gutterWidthResult", gutterWidth);
+  displayValueInMm("gutterWidthResult_mm", gutterWidth);
+  displayValue("gutterLengthResult", gutterLength);
+  displayValueInMm("gutterLengthResult_mm", gutterLength);
+  displayValue("docsAcrossResult", docsAcross);
+  displayValue("docsDownResult", docsDown);
 }
 
 /**
