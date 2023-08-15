@@ -25,7 +25,7 @@ function visualizeImposition(
   docWidth,
   docLength,
   gutterWidth,
-  gutterLength
+  gutterLength,
 ) {
   const visualizationDiv = document.getElementById("sheetWrapper");
   visualizationDiv.style.width = `${sheetWidth * 25.4}px`;
@@ -75,3 +75,71 @@ visualizationDiv.append(...docDivs);
   visualizationDiv.append(...docDivs);
 }
 
+// Code To Visualize Cuts and Slits one Day
+/* Cuts
+// Initialize the visualization when the window loads
+window.addEventListener("load", function () {
+  // Default parameters, including placeholder arrays for cuts and slits
+  visualizeImposition(12, 18, 3.685, 1.685, 2, 2, 5, 7, 0.315, 0.315, [], []);
+});
+
+// Attach event listeners to input elements to update the visualization
+// when any input value changes
+["sheetWidth", "sheetLength", "leadTrim", "sideTrim", "docsDown", "docsAcross", 
+ "docWidth", "docLength", "gutterWidth", "gutterLength"].forEach(id => {
+    document.getElementById(id).addEventListener("input", calculate);
+});
+
+function visualizeImposition(
+  sheetWidth,
+  sheetLength,
+  leadTrim,
+  sideTrim,
+  docsDown,
+  docsAcross,
+  docWidth,
+  docLength,
+  gutterWidth,
+  gutterLength,
+  cuts,
+  slits
+) {
+  // Get the main visualization container
+  const visualizationDiv = document.getElementById("sheetWrapper");
+
+  // Set the size of the visualization container based on sheet dimensions
+  visualizationDiv.style.width = `${sheetWidth * 25.4}px`;
+  visualizationDiv.style.height = `${sheetLength * 25.4}px`;
+  visualizationDiv.innerHTML = "";
+
+  // Calculate total width and height occupied by all docs including gutters
+  const totalDocWidth = (docWidth * docsAcross + gutterWidth * (docsAcross - 1)) * 25.4;
+  const totalDocHeight = (docLength * docsDown + gutterLength * (docsDown - 1)) * 25.4;
+
+  // Calculate offsets to center the documents on the sheet
+  const offsetX = (sheetWidth * 25.4 - totalDocWidth - sideTrim) / 2;
+  const offsetY = (sheetLength * 25.4 - totalDocHeight - leadTrim) / 2;
+
+  // Create document divs and set their positions and styles
+  const docDivs = [];
+  for (let i = 0; i < docsDown; i++) {
+    for (let j = 0; j < docsAcross; j++) {
+      const docDiv = document.createElement("div");
+      // ... [rest of the code for doc visualization]
+    }
+  }
+
+  // Create and visualize horizontal cuts on the sheet
+  for (let i = 0; i < cuts.length; i++) {
+    // ... [rest of the code for cut visualization]
+  }
+
+  // Create and visualize vertical slits on the sheet
+  for (let i = 0; i < slits.length; i++) {
+    // ... [rest of the code for slit visualization]
+  }
+
+  // Append the document divs to the main visualization container
+  visualizationDiv.append(...docDivs);
+}
+*/
