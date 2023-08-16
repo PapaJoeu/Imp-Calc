@@ -36,6 +36,26 @@
   border-radius: 5px;
 }
 
+/* The Results Table in The Third Column */
+.results-table {
+  margin: 3%;
+  width: 94%;
+  table-layout: fixed;
+}
+
+.results-table tr:nth-child(odd) {
+  background-color: #d7dee9; /* Use the desired color for striped rows */
+}
+
+.results-table td:first-child {
+  text-align: left; /* Aligns content in the first column to the left */
+}
+
+.results-table td:nth-child(2),
+.results-table td:nth-child(3) {
+  text-align: center; /* Aligns content in the second and third columns to the center */
+}
+
 /* Media query for mobile devices */
 @media (max-width: 768px) {
   /* Switch to a single column layout */
