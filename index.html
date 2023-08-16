@@ -40,13 +40,15 @@
         <!-- </div> -->
         <!-- Calculator Tab -->
         <article aria-labelledby="tabButtonA" id="tab-A" role="tabpanel">
-          <!-- Imposition Form -->
           <form id="impositionForm">
-            <div class="main-container">
-              <!-- Controls -->
-              <div class="input-column">
-                <!-- First Column -->
+
+            <!-- Main Container for Columns -->
+            <div class="main-container-for-columns">
+
+              <!-- First Column -->
+              <div class="first-column-results">
                 <div class="input-section">
+                  
                   <fieldset>
                     <legend>Calculate!</legend>
                     <!-- Button and Progress Bar Section -->
@@ -56,6 +58,7 @@
                       <button id="optimize" type="button">Optimize</button>
                     </section>
                   </fieldset>
+
                   <!-- Sheet Dimensions -->
                   <fieldset>
                     <legend>Sheet Dimensions</legend>
@@ -120,27 +123,26 @@
                       <input id="gutterLength" required="" step="0.0393" type="number" value="0.315" />
                     </section>
                   </fieldset>
+
                 </div>
               </div>
+              
 
-              <!-- Second Column -->
-              <div class="third-column">
-                <div class="third-column">
+            <!-- Second Column -->
+
+              <!-- Imposition Visualization -->
+              <div class="result-column">
+                <div class="imposition-wrapper">
                   <fieldset>
                     <legend>Imposition Visualization</legend>
-                    <div id="sheetWrapper" style="
-                          display: flex;
-                          justify-content: center;
-                          align-items: center;
-                          background-color: #fff;
-                          border: 2px solid black;
-                          position: relative;
-                        ">
+                    <div id="sheetWrapper" class="sheet-wrapper"></div>
                   </fieldset>
                 </div> 
               </div>
+
+
               <!-- Results -->
-              <div class="input-column">
+              <div class="third-column">
                 <div class="input-section">
                   <fieldset>
                     <legend>Results</legend>

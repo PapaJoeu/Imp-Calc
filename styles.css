@@ -1,5 +1,5 @@
 /* Main Container */
-.main-container {
+.main-container-for-columns {
   display: flex; /* Display flex */
   flex-wrap: wrap; /* Wrap elements to a new line when there is no space left in the container */
   justify-content: space-around; /* Align items to the start of the container */
@@ -8,7 +8,7 @@
 }
 
 /* Input Column */
-.input-column {
+.first-column-results {
   min-width: 0;
   max-width: 32%;
   text-align: center; /* Align text to center */
@@ -39,13 +39,13 @@
 /* Media query for mobile devices */
 @media (max-width: 768px) {
   /* Switch to a single column layout */
-  .main-container {
+  .main-container-for-columns {
     flex-direction: column;
     width: auto;
   }
 
   /* Full width for all columns */
-  .input-column,
+  .first-column-results,
   .result-column,
   .third-column {
     text-align: left; /* Align text to left */
@@ -57,4 +57,21 @@ body {
   background-image: url(https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.imposition-visualization {
+  /* Styles for the second column */
+}
+
+.imposition-wrapper {
+  /* Styles for the wrapper within the second column */
+}
+
+.sheet-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid black;
+  position: relative;
 }
