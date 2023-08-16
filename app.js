@@ -11,6 +11,7 @@ const elements = {
   progressBar: document.getElementById("progressBar"),
   calculateButton: document.getElementById("calculate")
 };
+
 // Calculate Button!
 elements.calculateButton.addEventListener("click", calculate);
 
