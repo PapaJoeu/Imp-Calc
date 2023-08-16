@@ -53,7 +53,7 @@ for (let i = 0; i < docsDown; i++) {
     docDiv.style.top = `${offsetY + i * (docLength + gutterLength) * 25.4}px`;
 
     // Styling for the docDiv
-    docDiv.style.backgroundColor = "blue";
+    docDiv.style.backgroundColor = "pink";
     docDiv.style.border = "2px solid black";
     docDiv.style.display = "flex";
     docDiv.style.alignItems = "center";
