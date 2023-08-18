@@ -21,6 +21,7 @@ function displayValue(id, value, multiplier = 1) {
 }
 
 function updateDocsAcrossAndDown() {
+  // Extract values from elements object using destructuring assignment
   const {
     sheetWidth,
     sheetLength,
@@ -28,21 +29,17 @@ function updateDocsAcrossAndDown() {
     docLength,
     gutterWidth,
     gutterLength
-  } = Object.fromEntries(Object.entries(elements).map(([key, element]) => [key, getInputValue(element)]));
+  } = elements;
 
+  // Function to calculate the maximum number of documents that can fit
   const calculateMaxDocs = (sheetSize, docSize, gutterSize) =>
     Math.floor((sheetSize - gutterSize) / (docSize + gutterSize));
 
-  const docsAcross = calculateMaxDocs(sheetWidth, docWidth, gutterWidth);
-  const docsDown = calculateMaxDocs(sheetLength, docLength, gutterLength);
+  // Calculate the number of documents across and down
+  const docsAcross = calculateMaxDocs(+sheetWidth.value, +docWidth.value, +gutterWidth.value);
+  const docsDown = calculateMaxDocs(+sheetLength.value, +docLength.value, +gutterLength.value);
 
-  if (docsAcross <= 0 || docsDown <= 0) {
-    console.error('Error calculating the number of documents across and down.');
-    elements.docsAcross.value = '';
-    elements.docsDown.value = '';
-    return;
-  }
-
+  // Assign calculated values to element properties
   elements.docsAcross.value = docsAcross;
   elements.docsDown.value = docsDown;
 }
