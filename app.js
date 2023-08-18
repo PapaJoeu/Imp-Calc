@@ -16,14 +16,14 @@ const elements = {
 elements.calculateButton.addEventListener("click", calculate);
 
 // Hella event listeners for updating the number of documents across and down
-elements.sheetWidth.addEventListener("change", updateDocsAcrossAndDown);
-elements.sheetLength.addEventListener("change", updateDocsAcrossAndDown);
-elements.docWidth.addEventListener("change", updateDocsAcrossAndDown);
-elements.docLength.addEventListener("change", updateDocsAcrossAndDown);
-elements.gutterWidth.addEventListener("change", updateDocsAcrossAndDown);
-elements.gutterLength.addEventListener("change", updateDocsAcrossAndDown);
+elements.sheetWidth.addEventListener("change", calculateMaxNup);
+elements.sheetLength.addEventListener("change", calculateMaxNup);
+elements.docWidth.addEventListener("change", calculateMaxNup);
+elements.docLength.addEventListener("change", calculateMaxNup);
+elements.gutterWidth.addEventListener("change", calculateMaxNup);
+elements.gutterLength.addEventListener("change", calculateMaxNup);
 
-function updateDocsAcrossAndDown() {
+function calculateMaxNup() {
   // Retrieve input values
   const sheetWidth = parseFloat(elements.sheetWidth.value);
   const sheetLength = parseFloat(elements.sheetLength.value);
