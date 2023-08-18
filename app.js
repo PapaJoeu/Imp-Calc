@@ -8,180 +8,125 @@ const elements = {
   docsDown: document.getElementById("docsDown"),
   gutterWidth: document.getElementById("gutterWidth"),
   gutterLength: document.getElementById("gutterLength"),
-  progressBar: document.getElementById("progressBar"),
   calculateButton: document.getElementById("calculate")
 };
 
-// Calculate Button!
-elements.calculateButton.addEventListener("click", calculate);
+// Utility functions
+function getInputValue(element) {
+  return parseFloat(element.value);
+}
 
-// Hella event listeners for updating the number of documents across and down
-elements.sheetWidth.addEventListener("change", calculateMaxNup);
-elements.sheetLength.addEventListener("change", calculateMaxNup);
-elements.docWidth.addEventListener("change", calculateMaxNup);
-elements.docLength.addEventListener("change", calculateMaxNup);
-elements.gutterWidth.addEventListener("change", calculateMaxNup);
-elements.gutterLength.addEventListener("change", calculateMaxNup);
+function displayValue(id, value, multiplier = 1) {
+  document.getElementById(id).innerText = (value * multiplier).toFixed(3);
+}
 
-function calculateMaxNup() {
-  // Retrieve input values
-  const sheetWidth = parseFloat(elements.sheetWidth.value);
-  const sheetLength = parseFloat(elements.sheetLength.value);
-  const docWidth = parseFloat(elements.docWidth.value);
-  const docLength = parseFloat(elements.docLength.value);
-  const gutterWidth = parseFloat(elements.gutterWidth.value);
-  const gutterLength = parseFloat(elements.gutterLength.value);
+function updateDocsAcrossAndDown() {
+  const {
+    sheetWidth,
+    sheetLength,
+    docWidth,
+    docLength,
+    gutterWidth,
+    gutterLength
+  } = Object.fromEntries(Object.entries(elements).map(([key, element]) => [key, getInputValue(element)]));
 
-  // Perform error checks
-  if (isNaN(sheetWidth) || isNaN(sheetLength) || isNaN(docWidth) || isNaN(docLength) ||
-      isNaN(gutterWidth) || isNaN(gutterLength)) {
-    // Handle invalid or missing input values
-    elements.docsAcross.value = '';
-    elements.docsDown.value = '';
-    return;
-  }
+  const calculateMaxDocs = (sheetSize, docSize, gutterSize) =>
+    Math.floor((sheetSize - gutterSize) / (docSize + gutterSize));
 
-  // Find Max Values that can fit on the sheet incase prepress is too lazy to do the math
-  const docsAcross = Math.floor((sheetWidth - gutterWidth) / (docWidth + gutterWidth));
-  const docsDown = Math.floor((sheetLength - gutterLength) / (docLength + gutterLength));
+  const docsAcross = calculateMaxDocs(sheetWidth, docWidth, gutterWidth);
+  const docsDown = calculateMaxDocs(sheetLength, docLength, gutterLength);
 
-  // Handle potential calculation errors
-  if (isNaN(docsAcross) || isNaN(docsDown) || docsAcross <= 0 || docsDown <= 0) {
-    // Handle errors in calculations
-    elements.docsAcross.value = '';
-    elements.docsDown.value = '';
+  if (docsAcross <= 0 || docsDown <= 0) {
     console.error('Error calculating the number of documents across and down.');
+    elements.docsAcross.value = '';
+    elements.docsDown.value = '';
     return;
   }
 
-  // Update the number of documents across and down on the page
   elements.docsAcross.value = docsAcross;
   elements.docsDown.value = docsDown;
 }
 
+  function calculate() {
+  const {
+      sheetWidth,
+      sheetLength,
+      docWidth,
+      docLength,
+      docsAcross,
+      docsDown,
+      gutterWidth,
+      gutterLength
+  } = Object.fromEntries(Object.entries(elements).map(([key, element]) => [key, parseFloat(element.value)]));
 
-function calculate() {
-  try {
-    const getInputValue = (element) => parseFloat(element.value);
-
-    // Retrieve input values
-    const sheetWidth = getInputValue(elements.sheetWidth);
-    const sheetLength = getInputValue(elements.sheetLength);
-    const docWidth = getInputValue(elements.docWidth);
-    const docLength = getInputValue(elements.docLength);
-    const docsAcross = getInputValue(elements.docsAcross);
-    const docsDown = getInputValue(elements.docsDown);
-    const gutterWidth = getInputValue(elements.gutterWidth);
-    const gutterLength = getInputValue(elements.gutterLength);
-
-    // Validate input values
-    if (
-      [sheetWidth, sheetLength, docWidth, docLength, docsAcross, docsDown, gutterWidth, gutterLength].some(Number.isNaN)
-    ) {
-      throw new Error("Invalid input. Please enter valid numbers for all fields.");
-    }
-
-    // Calculate lead and side trim
-    const leadTrim = sheetLength - (docsDown * docLength + (docsDown - 1) * gutterLength);
-    const sideTrim = sheetWidth - (docsAcross * docWidth + (docsAcross - 1) * gutterWidth);
-
-    // Display results
-    displayResults(sheetWidth, sheetLength, docWidth, docLength, leadTrim, sideTrim, gutterWidth, gutterLength, docsAcross, docsDown);
-
-    // Display cuts and slits
-    displayCutsAndSlits(docsAcross, docsDown);
-
-    // Visualize the imposition
-    visualizeImposition(sheetWidth, sheetLength, leadTrim, sideTrim, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength);
-  } catch (error) {
-    console.error("An error occurred:", error.message);
-    // Display an error message to the user or handle the error gracefully
+  if ([sheetWidth, sheetLength, docWidth, docLength, docsAcross, docsDown, gutterWidth, gutterLength].some(Number.isNaN)) {
+      console.error("Invalid input. Please enter valid numbers for all fields.");
+      return;
   }
-}
+
+  const calculateTrim = (sheetSize, docSize, numDocs, gutterSize) => sheetSize - (numDocs * docSize + (numDocs - 1) * gutterSize);
+  const leadTrim = calculateTrim(sheetLength, docLength, docsDown, gutterLength);
+  const sideTrim = calculateTrim(sheetWidth, docWidth, docsAcross, gutterWidth);
+
+  displayResults(sheetWidth, sheetLength, docWidth, docLength, leadTrim, sideTrim, gutterWidth, gutterLength, docsAcross, docsDown);
+  displayCutsAndSlits(docsAcross, docsDown);
+
+  // Visualize the imposition
+  visualizeImposition(sheetWidth, sheetLength, leadTrim, sideTrim, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength);
+  }
 
 function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead, gutterWidth, gutterLength, docsAcross, docsDown) {
-  const displayValue = (id, value) => {
-    document.getElementById(id).innerText = value.toFixed(3);
+  const displayWithUnitConversion = (id, value) => {
+    displayValue(id, value);
+    displayValue(id + "_mm", value, 25.4);
   };
 
-  const displayValueInMm = (id, value) => {
-    const mmValue = (value * 25.4).toFixed(3);
-    document.getElementById(id).innerText = mmValue;
-  };
-
-  displayValue("sheetWidthResult", sheetWidth);
-  displayValueInMm("sheetWidthResult_mm", sheetWidth);
-  displayValue("sheetLengthResult", sheetLength);
-  displayValueInMm("sheetLengthResult_mm", sheetLength);
-  displayValue("docWidthResult", docWidth);
-  displayValueInMm("docWidthResult_mm", docWidth);
-  displayValue("docLengthResult", docLength);
-  displayValueInMm("docLengthResult_mm", docLength);
-  displayValue("topLeadResult", topLead);
-  displayValueInMm("topLeadResult_mm", topLead);
-  displayValue("sideLeadResult", sideLead);
-  displayValueInMm("sideLeadResult_mm", sideLead);
-  displayValue("gutterWidthResult", gutterWidth);
-  displayValueInMm("gutterWidthResult_mm", gutterWidth);
-  displayValue("gutterLengthResult", gutterLength);
-  displayValueInMm("gutterLengthResult_mm", gutterLength);
+  displayWithUnitConversion("sheetWidthResult", sheetWidth);
+  displayWithUnitConversion("sheetLengthResult", sheetLength);
+  displayWithUnitConversion("docWidthResult", docWidth);
+  displayWithUnitConversion("docLengthResult", docLength);
+  displayWithUnitConversion("topLeadResult", topLead);
+  displayWithUnitConversion("sideLeadResult", sideLead);
+  displayWithUnitConversion("gutterWidthResult", gutterWidth);
+  displayWithUnitConversion("gutterLengthResult", gutterLength);
   displayValue("docsAcrossResult", docsAcross);
   displayValue("docsDownResult", docsDown);
 }
 
-/**
- * Displays the cuts and slits in a table based on the given imposition parameters.
- *
- * @param {number} docsAcross - Number of documents across the sheet.
- * @param {number} docsDown - Number of documents down the sheet.
- */
-function displayCutsAndSlits(docsAcross, docsDown) {
-  // Retrieve input values
-  const sheetWidth = parseFloat(elements.sheetWidth.value);
-  const sheetLength = parseFloat(elements.sheetLength.value);
-  const docWidth = parseFloat(elements.docWidth.value);
-  const docLength = parseFloat(elements.docLength.value);
-  const gutterWidth = parseFloat(elements.gutterWidth.value);
-  const gutterLength = parseFloat(elements.gutterLength.value);
-
-  // Calculate cuts
-  const cuts = calculateCuts(sheetLength, docLength, docsDown, gutterLength);
-
-  // Calculate slits
-  const slits = calculateSlits(sheetWidth, docWidth, docsAcross, gutterWidth);
-
-// Prepare the cuts and slits data
-const cutsSlitsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`)
-  .concat(slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`))
-  .join('');
-
-// Populate the cuts and slits table
-document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
-}
-
-/**
- * Calculate positions based on sheet size, document size, number of documents, and gutter size.
- * @returns {number[]} - Positions array.
- */
 function calculatePositions(sheetSize, docSize, numDocs, gutterSize) {
   const positions = [];
   const position = (sheetSize - ((docSize * numDocs) + (gutterSize * (numDocs - 1)))) / 2;
 
   for (let i = 0; i < numDocs * 2; i++) {
-      const offset = Math.floor(i / 2);
-      const calculatedPosition = position + offset * (docSize + gutterSize) + (i % 2 === 0 ? 0 : docSize);
-      positions.push(calculatedPosition.toFixed(3));
+    const offset = Math.floor(i / 2);
+    const calculatedPosition = position + offset * (docSize + gutterSize) + (i % 2 === 0 ? 0 : docSize);
+    positions.push(calculatedPosition.toFixed(3));
   }
 
   return positions;
 }
 
-/** Calculate cut positions based on sheet length, document length, docs down, and gutter length. */
-function calculateCuts(sheetLength, docLength, docsDown, gutterLength) {
-  return calculatePositions(sheetLength, docLength, docsDown, gutterLength);
+function displayCutsAndSlits(docsAcross, docsDown) {
+  const sheetWidth = getInputValue(elements.sheetWidth);
+  const sheetLength = getInputValue(elements.sheetLength);
+  const docWidth = getInputValue(elements.docWidth);
+  const docLength = getInputValue(elements.docLength);
+  const gutterWidth = getInputValue(elements.gutterWidth);
+  const gutterLength = getInputValue(elements.gutterLength);
+
+  const cuts = calculatePositions(sheetLength, docLength, docsDown, gutterLength);
+  const slits = calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
+
+  const cutsSlitsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`)
+    .concat(slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`))
+    .join('');
+
+  document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
 }
 
-/** Calculate slit positions based on sheet width, document width, docs across, and gutter width. */
-function calculateSlits(sheetWidth, docWidth, docsAcross, gutterWidth) {
-  return calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
-}
+// Event Listeners
+elements.calculateButton.addEventListener("click", calculate);
+
+['sheetWidth', 'sheetLength', 'docWidth', 'docLength', 'gutterWidth', 'gutterLength'].forEach(id => {
+  elements[id].addEventListener("change", updateDocsAcrossAndDown);
+});

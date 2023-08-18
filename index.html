@@ -62,6 +62,7 @@
                     <section class="field-row">
                       <button id="calculate" type="button">Calculate</button>
                       <button id="rotateDocs" type="button">Rotate Docs</button>
+                      <button id="setLeadValues">Set Lead Values</button>
                     </section>
                   </fieldset>
 
@@ -131,6 +132,19 @@
                     <section class="field-row">
                       <label for="gutterLength">Gutter Length (in inches):</label>
                       <input id="gutterLength" required="" step="0.0393" type="number" value="0.315" />
+                    </section>
+                  </fieldset>
+
+                  <!-- Trim Dimensions -->
+                  <fieldset>
+                    <legend>Trim Dimensions</legend>
+                    <section class="field-row">
+                      <label for="leadTrim">Lead Trim (in inches):</label>
+                      <input id="desiredLeadTrim" required="" step="0.01" type="number" />
+                    </section>
+                    <section class="field-row">
+                      <label for="sideTrim">Side Trim (in inches):</label>
+                      <input id="desiredSideTrim" required="" step="0.01" type="number" />
                     </section>
                   </fieldset>
 
