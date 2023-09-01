@@ -1,4 +1,5 @@
 const documentSizes = [
+    { description: "3.5x2", width: 3.5, length: 2 },
     { description: "5x7", width: 5, length: 7 },
     { description: "6x9", width: 6, length: 9 },
     { description: "8x10", width: 8, length: 10 },
