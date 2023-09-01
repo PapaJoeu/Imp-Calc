@@ -1,10 +1,10 @@
 // Constants
 const gutterMap = {
-  "1/8 inch - 0.125 in": { width: 0.125, length: 0.125 },
-  "1/4 inch - 0.25 in": { width: 0.25, length: 0.25 },
-  "1/2 inch - 0.5 in": { width: 0.5, length: 0.5 },
-  "1 inch - 1 in": { width: 1, length: 1 },
-  "8mm - 0.315 in": { width: 8 / 25.4, length: 8 / 25.4 },
+  "1/8 inch": { width: 0.125, length: 0.125 },
+  "1/4 inch": { width: 0.25, length: 0.25 },
+  "1/2 inch": { width: 0.5, length: 0.5 },
+  "1 inch": { width: 1, length: 1 },
+  "8mm": { width: 8 / 25.4, length: 8 / 25.4 },
   };
   
   // Functions
