@@ -1,34 +1,34 @@
-/* Main Container */
+/* Base Styles */
+body {
+  background-image: url('https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Main Container Styles */
 .main-container-for-columns {
-  display: flex; /* Display flex */
-  flex-wrap: wrap; /* Wrap elements to a new line when there is no space left in the container */
-  justify-content: space-around; /* Align items to the start of the container */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   width: 1080px;
   height: 100%;
 }
 
-/* Input Column */
-.first-column-results {
+/* Column Styles */
+.inputs {
   min-width: 0;
   max-width: 32%;
-  text-align: center; /* Align text to center */
+  text-align: center;
 }
 
-/* Result Column */
-.result-column {
+.visualization, 
+.calculated-results {
   min-width: 0;
   max-width: 33.33%;
-  text-align: center; /* Align text to center */
+  text-align: center;
 }
 
-/* Third Column */
-.third-column {
-  min-width: 0;
-  max-width: 33.33%;
-  text-align: center; /* Align text to center */
-}
-
-/* Section */
+/* Generic Section Styles - Consider renaming if a more specific purpose is identified */
 .section {
   padding: 20px;
   background-color: #f1f1f1;
@@ -36,7 +36,7 @@
   border-radius: 5px;
 }
 
-/* The Results Table in The Third Column */
+/* Table Styles */
 .results-table {
   margin: 3%;
   width: 94%;
@@ -44,49 +44,44 @@
 }
 
 .results-table tr:nth-child(odd) {
-  background-color: #d7dee9; /* Use the desired color for striped rows */
+  background-color: #d7dee9;
 }
 
 .results-table td:first-child {
-  text-align: left; /* Aligns content in the first column to the left */
+  text-align: left;
 }
 
 .results-table td:nth-child(2),
 .results-table td:nth-child(3) {
-  text-align: center; /* Aligns content in the second and third columns to the center */
+  text-align: center;
 }
 
-/* Media query for mobile devices */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  /* Switch to a single column layout */
   .main-container-for-columns {
     flex-direction: column;
     width: auto;
   }
 
-  /* Full width for all columns */
-  .first-column-results,
-  .result-column,
-  .third-column {
-    text-align: left; /* Align text to left */
+  .inputs,
+  .visualization,
+  .calculated-results {
+    width: 100%;
+    text-align: left;
+    padding: 20px;
   }
 }
 
-/* Add A Background from a file */
-body {
-  background-image: url(https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
+/* Future Styles - Commented as placeholders for potential future styles */
+/*
 .imposition-visualization {
-  /* Styles for the second column */
 }
 
 .imposition-wrapper {
-  /* Styles for the wrapper within the second column */
 }
+*/
 
+/* Additional Specific Styles */
 .sheet-wrapper {
   display: flex;
   justify-content: center;
