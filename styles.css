@@ -74,6 +74,14 @@
   .results-table td:first-child {
     text-align: left;
   }
+
+    /* Enhancing Header Row */
+  .results-table th {
+    font-weight: bold;
+    background-color: white;
+    border: #d0d0d0 1px solid;
+  }
+
   
   .results-table td:nth-child(2),
   .results-table td:nth-child(3) {
@@ -87,10 +95,20 @@
 
 /* Styling for Subheadings */
 .results-table .subheading {
-  background-color: #d0d0d0; /* A distinct background color for subheadings */
+  background-color: #e5e5e5; /* A lighter gray than the header */
   font-weight: bold;
   text-align: center;
+  padding: 5px 10px;
 }
+
+/* Styling for Visual Separators */
+.results-table .separator {
+  height: 10px; /* Or whatever height you deem fit */
+  background-color: #f7f7f7; /* A very light gray for spacing */
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
 
   /* ==========================================================================
      Mobile Responsiveness

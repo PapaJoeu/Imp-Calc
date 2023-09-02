@@ -76,36 +76,83 @@ function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, s
   const resultsTableBody = document.getElementById("resultsTableBody");
   resultsTableBody.innerHTML = ""; // Clear previous results
 
-  const measurements = [
-      ["Sheet Width", sheetWidth, "sheetWidthResult"],
-      ["Sheet Length", sheetLength, "sheetLengthResult"],
-      ["Document Width", docWidth, "docWidthResult"],
-      ["Document Length", docLength, "docLengthResult"],
-      ["Top Lead", topLead, "topLeadResult"],
-      ["Side Lead", sideLead, "sideLeadResult"],
-      ["Gutter Width", gutterWidth, "gutterWidthResult"],
-      ["Gutter Length", gutterLength, "gutterLengthResult"],
-      ["Documents Across", docsAcross, "docsAcrossResult"],
-      ["Documents Down", docsDown, "docsDownResult"]
-    ];
+  // Define the measurements and their groupings
+  const groupedMeasurements = [
+      {
+          subheading: "Sheet Measurements",
+          measurements: [
+              ["Sheet Width", sheetWidth, "sheetWidthResult"],
+              ["Sheet Length", sheetLength, "sheetLengthResult"]
+          ]
+      },
+      {
+          subheading: "Document Measurements",
+          measurements: [
+              ["Document Width", docWidth, "docWidthResult"],
+              ["Document Length", docLength, "docLengthResult"]
+          ]
+      },
+      {
+          subheading: "Gutter Measurements",
+          measurements: [
+              ["Gutter Width", gutterWidth, "gutterWidthResult"],
+              ["Gutter Length", gutterLength, "gutterLengthResult"]
+          ]
+      },
+      {
+          subheading: "Trim Measurements",
+          measurements: [
+              ["Top Lead", topLead, "topLeadResult"],
+              ["Side Lead", sideLead, "sideLeadResult"]
+          ]
+      },
+      {
+          subheading: "N-Up Counts",
+          measurements: [
+              ["Documents Across", docsAcross, "docsAcrossResult"],
+              ["Documents Down", docsDown, "docsDownResult"],
+          ]
+      }
+  ];
 
-  measurements.forEach(([label, value, id]) => {
-      const row = document.createElement("tr");
 
-      // Create cells for the measurement name, value in inches, and value in millimeters
-      const nameCell = document.createElement("td");
-      nameCell.innerText = label;
-      row.appendChild(nameCell);
+  groupedMeasurements.forEach(group => {
+      // Append the subheading
+      const subheadingRow = document.createElement("tr");
+      const subheadingCell = document.createElement("td");
+      subheadingCell.className = "subheading";
+      subheadingCell.colSpan = 3;  // Span across all 3 columns
+      subheadingCell.innerText = group.subheading;
+      subheadingRow.appendChild(subheadingCell);
+      resultsTableBody.appendChild(subheadingRow);
 
-      const inchCell = document.createElement("td");
-      inchCell.innerText = value.toFixed(3);
-      row.appendChild(inchCell);
+      // Append the measurements under the subheading
+      group.measurements.forEach(([label, value, id]) => {
+          const row = document.createElement("tr");
 
-      const mmCell = document.createElement("td");
-      mmCell.innerText = (value * 25.4).toFixed(3);
-      row.appendChild(mmCell);
+          // Create cells for the measurement name, value in inches, and value in millimeters
+          const nameCell = document.createElement("td");
+          nameCell.innerText = label;
+          row.appendChild(nameCell);
 
-      resultsTableBody.appendChild(row);
+          const inchCell = document.createElement("td");
+          inchCell.innerText = value.toFixed(3);
+          row.appendChild(inchCell);
+
+          const mmCell = document.createElement("td");
+          mmCell.innerText = (value * 25.4).toFixed(3);
+          row.appendChild(mmCell);
+
+          resultsTableBody.appendChild(row);
+      });
+
+      // Append a visual separator after each group
+      const separatorRow = document.createElement("tr");
+      const separatorCell = document.createElement("td");
+      separatorCell.className = "separator";
+      separatorCell.colSpan = 3;  // Span across all 3 columns
+      separatorRow.appendChild(separatorCell);
+      resultsTableBody.appendChild(separatorRow);
   });
 }
 
@@ -148,3 +195,4 @@ elements.calculateButton.addEventListener("click", calculate);
 ['sheetWidth', 'sheetLength', 'docWidth', 'docLength', 'gutterWidth', 'gutterLength'].forEach(id => {
   elements[id].addEventListener("change", updateDocsAcrossAndDown);
 });
+
