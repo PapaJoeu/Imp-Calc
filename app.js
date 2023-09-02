@@ -73,22 +73,42 @@ function updateDocsAcrossAndDown() {
   }
 
 function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead, gutterWidth, gutterLength, docsAcross, docsDown) {
-  const displayWithUnitConversion = (id, value) => {
-    displayValue(id, value);
-    displayValue(id + "_mm", value, 25.4);
-  };
+  const resultsTableBody = document.getElementById("resultsTableBody");
+  resultsTableBody.innerHTML = ""; // Clear previous results
 
-  displayWithUnitConversion("sheetWidthResult", sheetWidth);
-  displayWithUnitConversion("sheetLengthResult", sheetLength);
-  displayWithUnitConversion("docWidthResult", docWidth);
-  displayWithUnitConversion("docLengthResult", docLength);
-  displayWithUnitConversion("topLeadResult", topLead);
-  displayWithUnitConversion("sideLeadResult", sideLead);
-  displayWithUnitConversion("gutterWidthResult", gutterWidth);
-  displayWithUnitConversion("gutterLengthResult", gutterLength);
-  displayValue("docsAcrossResult", docsAcross);
-  displayValue("docsDownResult", docsDown);
+  const measurements = [
+      ["Sheet Width", sheetWidth, "sheetWidthResult"],
+      ["Sheet Length", sheetLength, "sheetLengthResult"],
+      ["Document Width", docWidth, "docWidthResult"],
+      ["Document Length", docLength, "docLengthResult"],
+      ["Top Lead", topLead, "topLeadResult"],
+      ["Side Lead", sideLead, "sideLeadResult"],
+      ["Gutter Width", gutterWidth, "gutterWidthResult"],
+      ["Gutter Length", gutterLength, "gutterLengthResult"],
+      ["Documents Across", docsAcross, "docsAcrossResult"],
+      ["Documents Down", docsDown, "docsDownResult"]
+    ];
+
+  measurements.forEach(([label, value, id]) => {
+      const row = document.createElement("tr");
+
+      // Create cells for the measurement name, value in inches, and value in millimeters
+      const nameCell = document.createElement("td");
+      nameCell.innerText = label;
+      row.appendChild(nameCell);
+
+      const inchCell = document.createElement("td");
+      inchCell.innerText = value.toFixed(3);
+      row.appendChild(inchCell);
+
+      const mmCell = document.createElement("td");
+      mmCell.innerText = (value * 25.4).toFixed(3);
+      row.appendChild(mmCell);
+
+      resultsTableBody.appendChild(row);
+  });
 }
+
 
 function calculatePositions(sheetSize, docSize, numDocs, gutterSize) {
   const positions = [];
