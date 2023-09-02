@@ -1,92 +1,125 @@
-/* Base Styles */
-body {
-  background-image: url('https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 
-/* Main Container Styles */
-.main-container-for-columns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 1080px;
-  height: 100%;
-}
+   body {
+    /* Background image for the entire webpage */
+    background-image: url('https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-/* Column Styles */
-.inputs {
-  min-width: 0;
-  max-width: 32%;
-  text-align: center;
-}
-
-.visualization, 
-.calculated-results {
-  min-width: 0;
-  max-width: 33.33%;
-  text-align: center;
-}
-
-/* Generic Section Styles - Consider renaming if a more specific purpose is identified */
-.section {
-  padding: 20px;
-  background-color: #f1f1f1;
-  margin: 0 10px 10px 10px;
-  border-radius: 5px;
-}
-
-/* Table Styles */
-.results-table {
-  margin: 3%;
-  width: 94%;
-  table-layout: fixed;
-}
-
-.results-table tr:nth-child(odd) {
-  background-color: #d7dee9;
-}
-
-.results-table td:first-child {
-  text-align: left;
-}
-
-.results-table td:nth-child(2),
-.results-table td:nth-child(3) {
-  text-align: center;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+  /* ==========================================================================
+     Main Container Styles
+     ========================================================================== */
+  
   .main-container-for-columns {
-    flex-direction: column;
+    /* Flex container for the three main columns */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: auto;
+    height: 100%;
   }
-
-  .inputs,
-  .visualization,
+  
+  /* ==========================================================================
+     Column Styles
+     ========================================================================== */
+  
+  .inputs {
+    /* Styles for the input column (1st column) */
+    min-width: 0;
+    max-width: 32%;
+    text-align: center;
+  }
+  
+  .visualization, 
   .calculated-results {
-    width: 100%;
-    text-align: left;
-    padding: 20px;
+    /* Styles for the visualization and calculated results columns (2nd and 3rd columns) */
+    min-width: 0;
+    max-width: 33.33%;
+    text-align: center;
   }
-}
+  
+  /* ==========================================================================
+     Generic Section Styles
+     ========================================================================== */
 
-/* Future Styles - Commented as placeholders for potential future styles */
-/*
-.imposition-visualization {
-}
-
-.imposition-wrapper {
-}
-*/
-
-/* Additional Specific Styles */
-.sheet-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border: 2px solid black;
-  position: relative;
-}
+  .section {
+    /* Styles for the sections within the columns */
+    margin: 3%;
+    padding: 3%;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  /* ==========================================================================
+     Table Styles
+     ========================================================================== */
+  
+  .results-table {
+    /* Styles for the results table within the calculated results column */
+    margin: 3%;
+    width: 94%;
+    table-layout: fixed;
+  }
+  
+  .results-table tr:nth-child(odd) {
+    background-color: #d7dee9;
+  }
+  
+  .results-table td:first-child {
+    text-align: left;
+  }
+  
+  .results-table td:nth-child(2),
+  .results-table td:nth-child(3) {
+    text-align: center;
+  }
+  
+  /* ==========================================================================
+     Mobile Responsiveness
+     ========================================================================== */
+  
+  @media (max-width: 768px) {
+    .main-container-for-columns {
+      /* Switch to a single column layout on mobile */
+      flex-direction: column;
+      width: auto;
+    }
+  
+    .inputs,
+    .visualization,
+    .calculated-results {
+      /* Full width for all columns on mobile and adjust padding */
+      width: 100%;
+      text-align: left;
+    }
+  
+    .results-table {
+      /* Full width for the results table on mobile */
+      width: max-content;
+    }
+  
+    .inputs {
+      /* Adjust text alignment for inputs on mobile */
+      text-align: center;
+    }
+  }
+  
+  /* ==========================================================================
+     Additional Specific Styles
+     ========================================================================== */
+  
+  .sheet-wrapper {
+    /* Styles for the sheet wrapper within the visualization column */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid black;
+    position: relative;
+  }
