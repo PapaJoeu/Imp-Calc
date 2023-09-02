@@ -114,12 +114,13 @@ function displayCutsAndSlits(docsAcross, docsDown) {
   const cuts = calculatePositions(sheetLength, docLength, docsDown, gutterLength);
   const slits = calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
 
-  const cutsSlitsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`)
-    .concat(slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`))
-    .join('');
+  const cutsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`).join('');
+  const slitsResults = slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`).join('');
 
-  document.getElementById("cutsSlitsResults").innerHTML = cutsSlitsResults;
+  document.getElementById("cutsTable").querySelector("tbody").innerHTML = cutsResults;
+  document.getElementById("slitsTable").querySelector("tbody").innerHTML = slitsResults;
 }
+
 
 // Event Listeners
 elements.calculateButton.addEventListener("click", calculate);

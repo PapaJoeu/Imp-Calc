@@ -77,9 +77,21 @@
   
   .results-table td:nth-child(2),
   .results-table td:nth-child(3) {
-    text-align: center;
+    text-align: right;
   }
   
+  /* Interactive Rows */
+.results-table tr:hover {
+  background-color: #e0e0e0; /* A slightly darker shade for hover effect */
+}
+
+/* Styling for Subheadings */
+.results-table .subheading {
+  background-color: #d0d0d0; /* A distinct background color for subheadings */
+  font-weight: bold;
+  text-align: center;
+}
+
   /* ==========================================================================
      Mobile Responsiveness
      ========================================================================== */
