@@ -95,10 +95,9 @@
 
 /* Styling for Subheadings */
 .results-table .subheading {
-  background-color: #e5e5e5; /* A lighter gray than the header */
   font-weight: bold;
   text-align: center;
-  padding: 5px 10px;
+  padding: 5px;
 }
 
 /* Styling for Visual Separators */
