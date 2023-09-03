@@ -88,3 +88,34 @@ function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, s
       return sigFigs;
     }
   }
+
+/**
+ * Display the cuts and slits for a given layout of documents on a sheet.
+ *
+ * @param {number} docsAcross - The number of documents across the sheet.
+ * @param {number} docsDown - The number of documents down the sheet.
+ */
+function displayCutsAndSlits(docsAcross, docsDown) {
+  // Get input values for sheet and document dimensions
+  const sheetWidth = getInputValue(elements.sheetWidth);
+  const sheetLength = getInputValue(elements.sheetLength);
+  const docWidth = getInputValue(elements.docWidth);
+  const docLength = getInputValue(elements.docLength);
+  const gutterWidth = getInputValue(elements.gutterWidth);
+  const gutterLength = getInputValue(elements.gutterLength);
+
+  // Calculate positions of cuts and slits
+  const cuts = calculatePositions(sheetLength, docLength, docsDown, gutterLength);
+  const slits = calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
+
+  // Conversion factor from inches to millimeters
+  const MM_CONVERSION_FACTOR = 25.4;
+
+  // Generate HTML table rows for cuts and slits results
+  const cutsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * MM_CONVERSION_FACTOR).toFixed(2)}</td></tr>`).join('');
+  const slitsResults = slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * MM_CONVERSION_FACTOR).toFixed(3)}</td></tr>`).join('');
+
+  // Update the cuts and slits tables with the generated results
+  document.getElementById("cutsTable").querySelector("tbody").innerHTML = cutsResults;
+  document.getElementById("slitsTable").querySelector("tbody").innerHTML = slitsResults;
+}

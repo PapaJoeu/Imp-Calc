@@ -3,18 +3,16 @@
    ========================================================================== */
 
    body {
-    /* Background image for the entire webpage */
     background-image: url('https://cdn.wallpaperhub.app/cloudcache/b/d/7/6/4/b/bd764bb25d49a05105060185774ba14cd2c846f7.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }
-
+  
   /* ==========================================================================
      Main Container Styles
      ========================================================================== */
   
   .main-container-for-columns {
-    /* Flex container for the three main columns */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -27,7 +25,6 @@
      ========================================================================== */
   
   .inputs {
-    /* Styles for the input column (1st column) */
     min-width: 0;
     max-width: 32%;
     text-align: center;
@@ -35,7 +32,6 @@
   
   .visualization, 
   .calculated-results {
-    /* Styles for the visualization and calculated results columns (2nd and 3rd columns) */
     min-width: 0;
     max-width: 33.33%;
     text-align: center;
@@ -44,9 +40,8 @@
   /* ==========================================================================
      Generic Section Styles
      ========================================================================== */
-
+  
   .section {
-    /* Styles for the sections within the columns */
     margin: 3%;
     padding: 3%;
     background-color: #fff;
@@ -55,13 +50,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
   
-  
   /* ==========================================================================
      Table Styles
      ========================================================================== */
   
   .results-table {
-    /* Styles for the results table within the calculated results column */
     margin: 3%;
     width: 94%;
     table-layout: fixed;
@@ -74,48 +67,41 @@
   .results-table td:first-child {
     text-align: left;
   }
-
-    /* Enhancing Header Row */
+  
   .results-table th {
     font-weight: bold;
     background-color: white;
     border: #d0d0d0 1px solid;
   }
-
   
   .results-table td:nth-child(2),
   .results-table td:nth-child(3) {
     text-align: right;
   }
   
-  /* Interactive Rows */
-.results-table tr:hover {
-  background-color: #e0e0e0; /* A slightly darker shade for hover effect */
-}
-
-/* Styling for Subheadings */
-.results-table .subheading {
-  font-weight: bold;
-  text-align: center;
-  padding: 5px;
-}
-
-/* Styling for Visual Separators */
-.results-table .separator {
-  height: 10px; /* Or whatever height you deem fit */
-  background-color: #f7f7f7; /* A very light gray for spacing */
-  border-top: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
-}
-
-
+  .results-table tr:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .results-table .subheading {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .results-table .separator {
+    height: 10px;
+    background-color: #f7f7f7;
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+  }
+  
   /* ==========================================================================
      Mobile Responsiveness
      ========================================================================== */
   
   @media (max-width: 768px) {
     .main-container-for-columns {
-      /* Switch to a single column layout on mobile */
       flex-direction: column;
       width: auto;
     }
@@ -123,18 +109,15 @@
     .inputs,
     .visualization,
     .calculated-results {
-      /* Full width for all columns on mobile and adjust padding */
       width: 100%;
       text-align: left;
     }
   
     .results-table {
-      /* Full width for the results table on mobile */
       width: max-content;
     }
   
     .inputs {
-      /* Adjust text alignment for inputs on mobile */
       text-align: center;
     }
   }
@@ -144,7 +127,6 @@
      ========================================================================== */
   
   .sheet-wrapper {
-    /* Styles for the sheet wrapper within the visualization column */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -152,3 +134,4 @@
     border: 1px solid black;
     position: relative;
   }
+  
