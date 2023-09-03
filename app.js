@@ -72,6 +72,44 @@ function updateDocsAcrossAndDown() {
   visualizeImposition(sheetWidth, sheetLength, leadTrim, sideTrim, docsDown, docsAcross, docWidth, docLength, gutterWidth, gutterLength);
   }
 
+function displayResults(sheetWidth, sheetLength, docWidth, docLength, topLead, sideLead, gutterWidth, gutterLength, docsAcross, docsDown) {
+  const resultsTableBody = document.getElementById("resultsTableBody");
+  resultsTableBody.innerHTML = ""; // Clear previous results
+
+  const measurements = [
+      ["Sheet Width", sheetWidth, "sheetWidthResult"],
+      ["Sheet Length", sheetLength, "sheetLengthResult"],
+      ["Document Width", docWidth, "docWidthResult"],
+      ["Document Length", docLength, "docLengthResult"],
+      ["Top Lead", topLead, "topLeadResult"],
+      ["Side Lead", sideLead, "sideLeadResult"],
+      ["Gutter Width", gutterWidth, "gutterWidthResult"],
+      ["Gutter Length", gutterLength, "gutterLengthResult"],
+      ["Documents Across", docsAcross, "docsAcrossResult"],
+      ["Documents Down", docsDown, "docsDownResult"]
+    ];
+
+  measurements.forEach(([label, value, id]) => {
+      const row = document.createElement("tr");
+
+      // Create cells for the measurement name, value in inches, and value in millimeters
+      const nameCell = document.createElement("td");
+      nameCell.innerText = label;
+      row.appendChild(nameCell);
+
+      const inchCell = document.createElement("td");
+      inchCell.innerText = value.toFixed(3);
+      row.appendChild(inchCell);
+
+      const mmCell = document.createElement("td");
+      mmCell.innerText = (value * 25.4).toFixed(3);
+      row.appendChild(mmCell);
+
+      resultsTableBody.appendChild(row);
+  });
+}
+
+
 function calculatePositions(sheetSize, docSize, numDocs, gutterSize) {
   const positions = [];
   const position = (sheetSize - ((docSize * numDocs) + (gutterSize * (numDocs - 1)))) / 2;
@@ -85,6 +123,24 @@ function calculatePositions(sheetSize, docSize, numDocs, gutterSize) {
   return positions;
 }
 
+function displayCutsAndSlits(docsAcross, docsDown) {
+  const sheetWidth = getInputValue(elements.sheetWidth);
+  const sheetLength = getInputValue(elements.sheetLength);
+  const docWidth = getInputValue(elements.docWidth);
+  const docLength = getInputValue(elements.docLength);
+  const gutterWidth = getInputValue(elements.gutterWidth);
+  const gutterLength = getInputValue(elements.gutterLength);
+
+  const cuts = calculatePositions(sheetLength, docLength, docsDown, gutterLength);
+  const slits = calculatePositions(sheetWidth, docWidth, docsAcross, gutterWidth);
+
+  const cutsResults = cuts.map((cut, index) => `<tr><td>Cut ${index + 1}</td><td>${cut}</td><td>${(cut * 25.4).toFixed(3)}</td></tr>`).join('');
+  const slitsResults = slits.map((slit, index) => `<tr><td>Slit ${index + 1}</td><td>${slit}</td><td>${(slit * 25.4).toFixed(3)}</td></tr>`).join('');
+
+  document.getElementById("cutsTable").querySelector("tbody").innerHTML = cutsResults;
+  document.getElementById("slitsTable").querySelector("tbody").innerHTML = slitsResults;
+}
+
 
 // Event Listeners
 elements.calculateButton.addEventListener("click", calculate);
@@ -92,4 +148,3 @@ elements.calculateButton.addEventListener("click", calculate);
 ['sheetWidth', 'sheetLength', 'docWidth', 'docLength', 'gutterWidth', 'gutterLength'].forEach(id => {
   elements[id].addEventListener("change", updateDocsAcrossAndDown);
 });
-
