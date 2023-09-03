@@ -50,8 +50,11 @@ function updateDocsAcrossAndDown() {
         gutterLength
     } = elements;
 
-    const calculateMaxDocs = (sheetSize, docSize, gutterSize) =>
-        Math.floor((sheetSize - gutterSize) / (docSize + gutterSize));
+  function calculateMaxDocs(sheetSize, docSize, gutterSize) {
+    const availableSpace = sheetSize + gutterSize;
+    const docsWithMargin = docSize + gutterSize;
+    return Math.floor(availableSpace / docsWithMargin);
+  }
 
     const docsAcross = calculateMaxDocs(+sheetWidth.value, +docWidth.value, +gutterWidth.value);
     const docsDown = calculateMaxDocs(+sheetLength.value, +docLength.value, +gutterLength.value);
